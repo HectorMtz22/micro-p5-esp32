@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+// #include "freertos/FreeRTOS.h"
+// #include "freertos/task.h"
+#include <rom/ets_sys.h>
 
 // Own Components
 #include "display.h"
@@ -27,7 +28,7 @@ void app_main() {
     if (btns_decrement()) {
       if (--state <= 0) state = 0;
       disp_show(state);
-      vTaskDelay(TIME_DELAY / portTICK_PERIOD_MS);
+      // vTaskDelay(TIME_DELAY / portTICK_PERIOD_MS);
     }
   }
 }
