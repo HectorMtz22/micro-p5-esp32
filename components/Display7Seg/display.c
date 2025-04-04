@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "display.h"
 #include "driver/gpio.h" 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+// #include "freertos/FreeRTOS.h"
+// #include "freertos/task.h"
+#include <rom/ets_sys.h>
 
 void disp_init(void) {
   gpio_set_direction(DISP_7_SEG_A, GPIO_MODE_OUTPUT);
@@ -60,8 +61,10 @@ void disp_show(int number) {
 void disp_test(void) {
   for (int i = 0; i < 3; i++) {
     disp_show(8);
-    vTaskDelay(TEST_DELAY / portTICK_PERIOD_MS);
+    ets_delay_us(TEST_DELAY * 1000);
+    // vTaskDelay(TEST_DELAY / portTICK_PERIOD_MS);
     disp_show(-1);
-    vTaskDelay(TEST_DELAY / portTICK_PERIOD_MS);
+    ets_delay_us(TEST_DELAY * 1000);
+    // vTaskDelay(TEST_DELAY / portTICK_PERIOD_MS);
   }
 }

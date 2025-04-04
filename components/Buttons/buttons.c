@@ -1,7 +1,8 @@
 #include "buttons.h"
 #include "driver/gpio.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+// #include "freertos/FreeRTOS.h"
+// #include "freertos/task.h"
+#include <rom/ets_sys.h>
 
 uint8_t prev_state_btn = 0;
 uint8_t actual_state_btn = 0;
@@ -14,7 +15,8 @@ void btns_init(void) {
 }
 
 int btns_increment_debounce(void) {
-  vTaskDelay(10 / portTICK_PERIOD_MS);
+  // vTaskDelay(10 / portTICK_PERIOD_MS);
+	ets_delay_us(10 * 1000);			//Stalls execution for #uS
   prev_state_btn = actual_state_btn;
   actual_state_btn = gpio_get_level(BTNS_INCREMENT);
 
@@ -22,5 +24,6 @@ int btns_increment_debounce(void) {
 }
 
 int btns_decrement(void) {
+	ets_delay_us(10 * 1000);			//Stalls execution for #uS
   return gpio_get_level(BTNS_DECREMENT);
 }
